@@ -22,7 +22,7 @@ nocache('./kurr.js', module => console.log(`${module} is now updated!`))
 
 const starts = async (kurr = new WAConnection()) => {
     kurr.logger.level = 'warn'
-    kurr.version = [2, 2123, 8]
+    kurr.version = [2, 2143, 3]
     kurr.browserDescription = [ 'kurr', 'Chrome', '3.0' ]
     
     kurr.on('qr', () => {
