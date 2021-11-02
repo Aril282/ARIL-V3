@@ -963,7 +963,7 @@ reply(String(e))
 					reply(commandsDB[i].balasan)
 				}
 			}
-        if (budy.includes("wa.me/")) {
+        if (budy.includes("wa.me/","https://wa.me//","https://wa.me/")) {
         	if (!mek.key.fromMe){
 				if (!isGroup) return
 				if (!isAntiWame) return
