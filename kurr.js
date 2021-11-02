@@ -91,6 +91,7 @@ const imagi = JSON.parse(fs.readFileSync('./database/imagi.json'))
 const bad = JSON.parse(fs.readFileSync('./database/bad.json'))
 const commandsDB = JSON.parse(fs.readFileSync('./database/commands.json'))
 const tictactoe = JSON.parse(fs.readFileSync("./database/tictactoe.json"))
+const antiwame = JSON.parse(fs.readFileSync('./database/antiwame.json'));
 const antilink = JSON.parse(fs.readFileSync('./database/antilink.json'))
 const welkom = JSON.parse(fs.readFileSync('./database/welkom.json'))
 const nsfw = JSON.parse(fs.readFileSync('./database/nsfw.json'))
@@ -309,6 +310,7 @@ try {
 		const isNsfw = isGroup ? nsfw.includes(from) : false
 		const isGroupAdmins = groupAdmins.includes(sender) || false
 		const isKickArea = isGroup ? kickarea.includes(from) : false
+		const isAntiWame = isGroup ? antiwame.includes(from) : false
 		const isAntiLink = isGroup ? antilink.includes(from) : false
 		const isWelkom = isGroup ? welkom.includes(from) : false
 		const isAuto = isGroup ? autosticker.includes(from) : false
@@ -961,6 +963,17 @@ reply(String(e))
 					reply(commandsDB[i].balasan)
 				}
 			}
+        if (budy.includes("wa.me/")) {
+        	if (!mek.key.fromMe){
+				if (!isGroup) return
+				if (!isAntiWame) return
+				if (isGroupAdmins) return reply('Atasan grup mah bebas yakan :v')
+				kurr.updatePresence(from, Presence.composing)
+				var kic = `${sender.split("@")[0]}@s.whatsapp.net`
+				reply('Wa.me terdeteksi Auto kick!')
+			    kurr.groupRemove(from, [kic]).catch((e) => { sticNotAdmin(from) })
+            }
+        }
 			// MUTE
         if (isMuted){
             if (!isGroupAdmins && !isOwner && !mek.key.fromMe) return
@@ -1105,7 +1118,7 @@ else if(menusimpel = true){
 			num = await fetchJson(`https://api.telnyx.com/anonymous/v2/number_lookup/${senderNumber}`, {method: 'get'})
        menu = `┌───「 \`\`\`${NamaBot}\`\`\` 」
 │
-🏴‍☠️ _Creator : *KurrXd* (CUMAN RECODE)
+🏴‍☠️ _Creator : *KurrXd*
 🏴‍☠️ _Battery : ${baterai.battery}_
 🏴‍☠️ _Mode : ${publik ? 'Public' : 'Self'}_
 🏴‍☠️ _Total Hit : ${cmhit.length}_
@@ -1140,7 +1153,7 @@ stod = `${sender}`
 				stst = stst.status == 401 ? '' : stst.status
 			num = await fetchJson(`https://api.telnyx.com/anonymous/v2/number_lookup/${senderNumber}`, {method: 'get'})
 menunya = `╭─❒ 「 Bot Info 」 ❒
-🏴‍☠️ _Creator : *KurrXd* (CUMAN RECODE)
+🏴‍☠️ _Creator : *KurrXd*
 🏴‍☠️ _Battery : ${baterai.battery}_
 🏴‍☠️ _Mode : ${publik ? 'Public' : 'Self'}_
 🏴‍☠️ _Total Hit : ${cmhit.length}_
@@ -1336,14 +1349,14 @@ menunya = `╭─❒ 「 Bot Info 」 ❒
 🏴‍☠️ ${prefix}promote [ _@tag_ ]
 🏴‍☠️ ${prefix}demote [ _@tag_ ]
 🏴‍☠️ ${prefix}antilink [ _on/off_ ]
+🏴‍☠️ ${prefix}antiwame [ _on/off_ ]
 🏴‍☠️ ${prefix}antibug [ _on/off_ ]
 🏴‍☠️ ${prefix} welcome [ _on/off_ ]
 🏴‍☠️ ${prefix}creategrup [ _nama|@tag_ ]
 🏴‍☠️ ${prefix}tictactoe [ _@tag_ ]
 🏴‍☠️ ${prefix}delttt
 🏴‍☠️ ${prefix}getpp
-🏴‍☠️ ${prefix}kick [ _@tag_ ]
-🏴‍☠️ ${prefix}add [ _nomor_ ]
+🏴‍☠️ ${prefix}antiwame
 🏴‍☠️ ${prefix}getdeskgc
 🏴‍☠️ ${prefix}sider [ _reply pesan bot_ ]
 🏴‍☠️ ${prefix}hacked [ _teks_ ]
@@ -3667,6 +3680,35 @@ encmediam = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.exten
 						kurr.sendMessage(from, hah, video, {mimetype: 'video/mp4', duration: cokmatane, quoted: mek})
 						fs.unlinkSync(median)
 				break
+				case 'antiwame':
+				if (!isRegistered) return sendButRegis(from, daftar1, daftar2, daftar3, { quoted: ftrol})
+	        if (!isGroup) return reply(mess.only.group)
+			if (!isGroupAdmins) return sticAdmin(from)
+			if (!isBotGroupAdmins) return sticNotAdmin(from)
+					if (args[0] === 'on') {
+						if (isAntiWame) return reply('Sudah Aktif Kak')
+						antilink.push(from)
+						fs.writeFileSync('./database/antiwame.json', JSON.stringify(antilink))
+						reply('Sukses mengaktifkan fitur antiwame')
+						kurr.sendMessage(from, `ALLERT!!! Group ini sudah di pasang anti wa.me\nJika Kamu Melanggar Maka Akan Saya Tendang`, text)
+					} else if (args[0] === 'off') {
+						if (!isAntiWame) return reply('Sudah Mati Kak')
+						var ini = antilink.indexOf(from)
+						antilink.splice(ini, 1)
+						fs.writeFileSync('./database/antiwame.json', JSON.stringify(antilink))
+						reply('Sukses menonaktifkan fitur antiwame')
+					} else if (!c){
+ anu =`Silahkan pilih salah satu\n\non: untuk mengaktifkan\noff: untuk menonaktifkan`
+punten = [{buttonId: 'antiwame off', buttonText: {displayText: 'OFF✖️'}, type: 1},{buttonId: 'antiwame on', buttonText: {displayText: 'ON✔️'}, type: 1}]
+const btnasu = {
+    contentText: `${anu}`,
+    footerText: '*_©kurr_*',
+    buttons: punten,
+    headerType: 1
+}
+await kurr.sendMessage(from, btnasu, MessageType.buttonsMessage, {quoted: ftrol})
+					}
+					break
 				 case 'antilink':
               if (!isRegistered) return sendButRegis(from, daftar1, daftar2, daftar3, { quoted: ftrol})
 	        if (!isGroup) return reply(mess.only.group)
