@@ -98,7 +98,7 @@ headerType: 4 }
 			ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 			}
 			let buff = await getBuffer(`https://kuontol-api.herokuapp.com/api/goodbye?nama=${anu_user}&member=${memeg}&gc=${encodeURI(mdata.subject)}&pp=${ppimg}&bg=https://cdn.wallpapersafari.com/38/89/pZxtn4.jpg`)
-			keluar =`Selamat tinggal @${num.split('@')[0]}\nSemoga tentang disana`
+			keluar =`Selamat tinggal @${num.split('@')[0]}\nSemoga tenang disana`
 			gbutsan = [{buttonId:'SERAH',buttonText:{displayText:'👋Byee'},type:1}]
 			mhan = await kurr.prepareMessage(mdata.id, buff, MessageType.image, {thumbnail: buff})
 const buttonMessages = { imageMessage: mhan.message.imageMessage,
