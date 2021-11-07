@@ -122,7 +122,7 @@ alasanafk = 'Nothing'
 NamaBot = settings.NamaBot
 NomorOwner = settings.NomorOwner
 NamaOwner = settings.NamaOwner
-ovo = settings.Ovo
+pulsa = settings.Pulsa
 dana = settings.Dana
 gopay = settings.Gopay
 multi = true
@@ -413,6 +413,27 @@ var imageTime = await getBuffer('https://i.pinimg.com/736x/15/8e/ea/158eea299c01
 }
  // FAKE REPLY BY YOGI PEWE
 // PRODUCT
+      const kick = function(from, orangnya){
+	       for (let i of orangnya){
+	       kurr.groupRemove(from, [i])
+        }
+        }
+       const kickMember = async(id, target = []) => {
+           let group = await kurr.groupMetadata(id)
+           let owner = group.owner.replace("c.us", "s.whatsapp.net")
+           let me = kurr.user.jid
+           for (i of target) {
+           if (!i.includes(me) && !i.includes(owner)) {
+           await kurr.groupRemove(to, [i])
+        } else {
+           await kurr.sendMessage(id, "Not Premited!", "conversation")
+           break
+        }
+    }
+}
+       const add = function(from, orangnya){
+	       kurr.groupAdd(from, orangnya)
+}
 const ftok = {
 key: {
 			fromMe: false,
@@ -2828,7 +2849,7 @@ for (let i of ownerNumber) {
 const vname = kurr.contacts[i] != undefined ? kurr.contacts[i].vname || kurr.contacts[i].notify : undefined
 ini_list.push({
 "displayName": `Developer ${NamaBot}`,
-"vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Owner;;;\nFN:${vname ? `${vname}` : `${kurr.user.name}`}\nitem1.TEL;waid=${i.split('@')[0]}:${i.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+"vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;${NamaOwner};;;\nFN:${vname ? `${vname}` : `${kurr.user.name}`}\nitem1.TEL;waid=${i.split('@')[0]}:${i.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
 })
 }
 kurr.sendMessage(from, {
@@ -2870,8 +2891,10 @@ break
 		case 'sc':
 		case 'sewabot':
 		case 'sourcecode':
-		anu =`SC BOT :35K FULL NO ENC
-		SEWABOT 15K PERMANEN`
+		anu =`PRICELIST SEWABOT
+		10K:6BULAN
+		20K:MANEN
+		SC:https://github.com/KurrXd`
  buttons = [
 {buttonId: `menu`, buttonText: {displayText: 'BACK➡️'}, type: 1},
 {buttonId:`donasi`,buttonText:{displayText:'💗DONASI💗'},type:1},
@@ -2890,9 +2913,9 @@ dona = fs.readFileSync('./media/donasi.jpg')
 doni =`*╭─❒ 「 Donasi 」 ──────*
 *│*
 *│*⬡ *Mau donasi apa cuma liat doang?*
-*│*⬡ *PULSA     :* ${ovo}
+*│*⬡ *PULSA     : ${pulsa}*
 *│*⬡ *DANA    : ${dana}*
-*│*⬡ *GOPAY    : *SCAN DI ATAS AJA*
+*│*⬡ *GOPAY    : SCAN DI ATAS AJA*
 *└───────────────────*
 Scan QR di atas bila belum premium`
 kurr.sendMessage(from, dona, image, { quoted: ftrol, thumbnail: dona, caption: doni })
@@ -5203,15 +5226,13 @@ break
                 kurr.updateProfileName(anu)
                 reply(`Sukses mengganti nama ke ${body.slice(9)}`)
                 break
+                case 'add':
+             reply(`MAAF FITURE INI DI NON AKTIFKAN KARNA MENYEBABKAN TERBANNED NYA BOT`)
+             break
 	
 				case 'kick':
-              if (!isRegistered) return sendButRegis(from, daftar1, daftar2, daftar3, { quoted: ftrol})
-			if (!isGroup) return reply(mess.only.group)
-			if (!isGroupAdmins) return sticAdmin(from)
-			if (!isBotGroupAdmins) return sticNotAdmin(from)
-			if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Reply targetnya!')
-			kick = mek.message.extendedTextMessage.contextInfo.participant
-		    kurr.groupRemove(from, [kick])
+             reply(`MAAF FITURE INI DI NON AKTIFKAN KARNA MENYEBABKAN TERBANNED NYA BOT`)
+             break
 						reply('Sukses mengeluarkan peserta')
                     break
                     case 'creategroup':
@@ -5486,7 +5507,7 @@ Giliran = @${tty.player1.split('@')[0]}`
 * @Bryan Rafly
 * @Ma'Ruf
 * @KurrXD
-* @Ikyy
+* @kurr
 * @Hardianto api
 **/
 
