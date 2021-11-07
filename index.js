@@ -21,6 +21,10 @@ require('./kurr.js')
 nocache('./kurr.js', module => console.log(`${module} is now updated!`))
 
 const starts = async (kurr = new WAConnection()) => {
+            console.log(bgcolor(`⚠️SC ORI KURRXD`, 'red'))
+            console.log(bgcolor(`⚠️Script Inii Buatan KurrXd OFFICIAL`, 'blue'))
+            console.log(bgcolor(`⚠️JAN DI JUAL YA`, 'green'))
+	    	console.log(bgcolor(`⚠️INI SC MILIK YT KurrXd OFFICIAL`, 'blue'))
     kurr.logger.level = 'warn'
     kurr.version = [2, 2143, 3]
     kurr.browserDescription = [ 'kurr', 'Chrome', '3.0' ]
@@ -35,11 +39,7 @@ const starts = async (kurr = new WAConnection()) => {
     })
     kurr.on('open', () => {
         success('2', 'Connected')
-        setTimeout( () => {
-        	console.log(bgcolor(`⚠️kurr LOAD.....`, 'red'))
-            console.log(bgcolor(`⚠️Script Ini Di Susun Bersama-sama`, 'blue'))
-            console.log(bgcolor(`⚠️KurrXd,Ranz`, 'green'))
-	    	console.log(bgcolor(`⚠️Created By kurr Team`, 'blue'))
+        setTimeout( () => { 	
 	    	}, 1000)    		    	     	
     })
     await kurr.connect({timeoutMs: 30*1000})
@@ -67,10 +67,13 @@ const starts = async (kurr = new WAConnection()) => {
 		    num = anu.participants[0]
 			try {
 			ppimg = await kurr.getProfilePicture(`${num.split('@')[0]}@c.us`)
-			} catch {
-			ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+			} catch {                
+            	num = anu.participants[0]
+                anu_user = kurr.kurrname || kurr.notify || num.split('@')[0]
+                time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
+			    ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 			}
-			let buff = await getBuffer(ppimg)
+			let buff = await getBuffer(`https://kuontol-api.herokuapp.com/api/welcome?nama=${anu_user}&member=${memeg}&gc=${encodeURI(mdata.subject)}&pp=${ppimg}&bg=https://cdn.wallpapersafari.com/38/89/pZxtn4.jpg`)
 			masuk =`Halo @${num.split('@')[0]}\nSelamat Datang Di ${mdata.subject}\n\n*Jangan Lupa Isi*\n*Nama* :\n*Umur* :\n*Gender* :\n*Askot* :\n\nEnjoy Jangan Lupa Kenalan\nKlik Button Di Bawah Untuk Memulai Bot\nNote Jika Tidak Ada Ketik .allmenu`
 			gbutsan = [{buttonId:'SERAH',buttonText:{displayText:'👋Welcome'},type:1}]
 			mhan = await kurr.prepareMessage(mdata.id, buff, MessageType.image, {thumbnail: buff})
@@ -87,10 +90,14 @@ headerType: 4 }
 			num = anu.participants[0]
 			try {
 			ppimg = await kurr.getProfilePicture(`${num.split('@')[0]}@c.us`)
-			} catch {
+			} catch {			
+                memeg = mdata.participants.length
+            	num = anu.participants[0]
+                anu_user = kurr.kurrname || kurr.notify || num.split('@')[0]
+                time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
 			ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 			}
-			let buff = await getBuffer(ppimg)
+			let buff = await getBuffer(`https://kuontol-api.herokuapp.com/api/goodbye?nama=${anu_user}&member=${memeg}&gc=${encodeURI(mdata.subject)}&pp=${ppimg}&bg=https://cdn.wallpapersafari.com/38/89/pZxtn4.jpg`)
 			keluar =`Selamat tinggal @${num.split('@')[0]}\nSemoga tentang disana`
 			gbutsan = [{buttonId:'SERAH',buttonText:{displayText:'👋Byee'},type:1}]
 			mhan = await kurr.prepareMessage(mdata.id, buff, MessageType.image, {thumbnail: buff})
