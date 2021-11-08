@@ -68,6 +68,7 @@ const starts = async (kurr = new WAConnection()) => {
 			try {
 			ppimg = await kurr.getProfilePicture(`${num.split('@')[0]}@c.us`)
 			} catch {                
+            	memeg = mdata.participants.length
             	num = anu.participants[0]
                 anu_user = kurr.kurrname || kurr.notify || num.split('@')[0]
                 time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
