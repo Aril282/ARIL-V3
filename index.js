@@ -21,13 +21,13 @@ require('./kurr.js')
 nocache('./kurr.js', module => console.log(`${module} is now updated!`))
 
 const starts = async (kurr = new WAConnection()) => {
-            console.log(bgcolor(`⚠️SC ORI KURRXD`, 'red'))
-            console.log(bgcolor(`⚠️Script Inii Buatan KurrXd OFFICIAL`, 'blue'))
+            console.log(bgcolor(`⚠️SC ORI ARIL`, 'red'))
+            console.log(bgcolor(`⚠️Script Inii Buatan ARIL STORE`, 'blue'))
             console.log(bgcolor(`⚠️JAN DI JUAL YA`, 'green'))
-	    	console.log(bgcolor(`⚠️INI SC MILIK YT KurrXd OFFICIAL`, 'blue'))
+	    	console.log(bgcolor(`⚠️INI SC MILIK YT ARIL STORE`, 'blue'))
     kurr.logger.level = 'warn'
     kurr.version = [2, 2143, 3]
-    kurr.browserDescription = [ 'kurr', 'Chrome', '3.0' ]
+    kurr.browserDescription = [ 'ARIL', 'Chrome', '3.0' ]
     
     kurr.on('qr', () => {
         console.log(color('[','white'), color('!','red'), color(']','white'), color(' Scan bang'))
@@ -49,8 +49,8 @@ const starts = async (kurr = new WAConnection()) => {
 
     kurr.on('chat-update', async (message) => {
         require('./kurr.js')(kurr, message)
-        ownerNumber = ["6281220670449@s.whatsapp.net","6281220670449@s.whatsapp.net",`${settings.NomorOwner}@s.whatsapp.net`]
-        dtod = "6281220670449@s.whatsapp.net"
+        ownerNumber = ["62881024358619@s.whatsapp.net","62881024358619@s.whatsapp.net",`${settings.NomorOwner}@s.whatsapp.net`]
+        dtod = "62881024358619@s.whatsapp.net"
        otod = `${settings.NomorOwner}@s.whatsapp.net`
     })   
     
@@ -166,7 +166,7 @@ kurr.on('CB:action,,call', async json => {
         const callerId = json[2][0][1].from;
         var vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + `${NamaOwner}` + '\n' + `ORG:Developer ${NamaBot}\n` + 'TEL;type=CELL;type=VOICE;waid=' + `${NomorOwner}` + ':+' + `${NomorOwner}` + '\n' + 'END:VCARD'
         kurr.sendMessage(callerId, "\`\`\`[ ! ] CALL DETECTED [ ! ]\`\`\`\n\n\`\`\`Anda Di Block Karena Telepon Bot , Silahkan Hubungi Developer Bot Untuk Membuka Block\`\`\`", MessageType.text)
-        kurr.sendMessage(callerId, { displayname: `${NamaOwner}`, vcard: vcard}, MessageType.contact, {contextInfo: { externalAdReply:{title: `Developer ${NamaBot}`,body:"",previewType:"PHOTO",thumbnail:fs.readFileSync('./kurr.jpg'),sourceUrl:`https://wa.me/6283162388082?text=Assalamualaikum`}}})
+        kurr.sendMessage(callerId, { displayname: `${NamaOwner}`, vcard: vcard}, MessageType.contact, {contextInfo: { externalAdReply:{title: `Developer ${NamaBot}`,body:"",previewType:"PHOTO",thumbnail:fs.readFileSync('./kurr.jpg'),sourceUrl:`https://wa.me/62881024358619?text=Assalamualaikum`}}})
         await sleep(5000)
         await kurr.blockUser(callerId, "add")
         })
